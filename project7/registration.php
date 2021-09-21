@@ -1,14 +1,14 @@
 <?php
 // Include config file
 require_once "config.php";
- 
+
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = "";
- 
+
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
+
     // Validate username
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter a username.";
@@ -43,6 +43,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             mysqli_stmt_close($stmt);
         }
     }
+
+    // Validate first name
+    if(empty(trim($_POST["fName"]))){
+        $fName_err = "Please enter your first name.";     
+    } else{
+        $fName = trim($_POST["fName"]);
+    }
+    // Validate last name
+    if(empty(trim($_POST["lName"]))){
+        $lName_err = "Please enter your last name.";     
+    } else{
+        $lName = trim($_POST["lName"]);
+    }
+
+    // Validate birthday
+    if(empty(trim($_POST["bd"]))){
+        $bd_err = "Please enter your birth day.";     
+    } else{
+        $bd = trim($_POST["bd"]);
+    }
+    
     
     // Validate password
     if(empty(trim($_POST["password"]))){
@@ -64,18 +85,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+    if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($fName_err) && empty($lName_err) && empty($bd_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-         
+        $sql = "INSERT INTO users (username, password, birthday, first_name, last_name) VALUES (?, ?, ?, ?, ?)";
+
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+            mysqli_stmt_bind_param($stmt, "sssss", $param_username, $param_password, $param_birthday, $param_first_name, $param_last_name);
             
             // Set parameters
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            $param_birthday = $bd;
+            $param_first_name = $fName;
+            $param_last_name = $lName;
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -111,6 +135,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <h2>Sign Up</h2>
         <p>Please fill this form to create an account.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text" name="fName" class="form-control <?php echo (!empty($fName_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $fName; ?>">
+                <span class="invalid-feedback"><?php echo $fName_err; ?></span>
+            </div>  
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" name="lName" class="form-control <?php echo (!empty($lName_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $lName; ?>">
+                <span class="invalid-feedback"><?php echo $lName_err; ?></span>
+            </div>  
+            <div class="form-group">
+                <label>Birth Day mm/dd/yyyy</label>
+                <input type="text" name="bd" class="form-control <?php echo (!empty($bd_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $bd; ?>">
+                <span class="invalid-feedback"><?php echo $bd_err; ?></span>
+            </div>  
             <div class="form-group">
                 <label>Username</label>
                 <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
