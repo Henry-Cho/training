@@ -1,0 +1,26 @@
+section {
+    width: 50vw;
+    margin: auto;
+    background: #897677;
+    padding: 20px 20px;
+}
+
+div {
+    margin-bottom: 4px;
+}
+
+form {
+    border: 2px solid #605354;
+    padding: 20px 20px;
+    text-align: center;
+}
+
+.row, .box {
+    display: flex;
+    justify-content: center;
+}
+
+.row label, .box label {
+    min-width: 73px;
+    margin-right: 8px;
+}

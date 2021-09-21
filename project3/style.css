@@ -1,0 +1,97 @@
+
+body {
+    margin: 0;
+}
+
+h2 {
+    width: 100%;
+    color: white;
+}
+
+.container {
+    background-image: url('./static/wooden\ bg\ img.jpeg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+    max-width: 1000px;
+}
+
+.board {
+    background: #00704E;
+    width: 80%;
+    min-height: 300px;
+    border: 18px solid #88483C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 4rem;
+}
+
+/* User interaction area */
+.interact {
+    width: 80%;
+    display: flex;
+}
+
+/* Left side */
+.left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.submission_box {
+    display: flex;
+}
+
+input {
+    max-height: 16px;
+    margin-right: 16px;
+}
+
+.btn_box {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn_box button {
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+/* Right side */
+.right {
+    padding-top: 20px;
+    width: 50%;
+}
+
+.table {
+    background: #F0F0DD;
+    border-style: double;
+    border-bottom: none;
+    width: 90%;
+}
+
+.row {
+    display: flex;
+    border-style: double;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+}
+
+.cell.l {
+    width: 60%;
+    border-style: double;
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
+}
+

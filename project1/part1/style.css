@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    max-width: 1000px;
+}
+
+p {
+    margin: 0;
+}
+
+/* float */
+section {
+    background: palegreen;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 12px 0;
+    margin-bottom: 30px;
+}
+
+.float {
+    float: left;
+}
+
+.container {
+    width: 80%;
+}
+
+.container.float {
+    float: left;
+}
+
+.box {
+    border: 1px solid orange;
+    width: 40%;
+    height: 200px;
+    background: skyblue;
+}
+
+.box.one, .box.two {
+    background: white;
+}
+
+.box.one {
+    float: right;
+}
+
+.box.two {
+    float: left;
+}
+
+/* inline-block */
+.container.inline {
+    display: inline-block;
+}
+
+.box.three {
+    float: left;
+}
+
+.box.four {
+    float: right;
+}
+
+/* Absolute Positioning */
+
+.container.absolute {
+    position: relative;
+    height: 200px;
+}
+
+.box.five, .box.six {
+    position: absolute;
+}
+
+.box.six {
+    right:0;
+}

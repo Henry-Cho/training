@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 4c - Building the clock-</title>
+    <link href="style.css" rel="stylesheet">
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <section class="container">
+        <div class="prob_container">
+            <!-- this will display by the function -->
+            <p id="setClock">Set the clock to <span id="time"></span></p>
+            <span>Insert Time in the hour and the minutes [ex) 11:11]</span>
+            <input type="text" id="input">
+            <button onclick="display()">Set Clock</button>
+        </div>
+        <div class="clock_container" id="clock" ondragover="allowDrop(event)" ondrop="drop(event)">
+            <div class="hand" id="min">
+                <div class="dot" draggable="true" ondragstart="drag(event)"></div>
+                <div class="actual_hand" draggable="true"></div>
+            </div>
+            <div class="hand" id="hour">
+                <div class="dot" draggable="true" ondragstart="drag(event)"></div>
+                <div class="actual_hand" draggable="true"></div>
+            </div>
+            <div class="center"></div>
+        </div>
+    </section>
+</body>
+</html>

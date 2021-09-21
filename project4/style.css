@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+}
+
+section {
+    padding: 60px 80px;
+
+}
+
+.prob_container {
+    margin-bottom: 20px;
+}
+
+.clock_container {
+    background-image: url('./static/bigclock.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    max-width: 1000px;
+    height: 800px;
+    margin: auto;
+    position: relative;
+}
+
+.hand {
+    width: 2%;
+    height: 50%;
+    top: 0px;
+    position: absolute;
+    left: 49.4%;
+    transform-origin: bottom;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dot:hover {
+    transform: scale(1.5);
+    transition: all 200ms ease;
+}
+
+#min, #hour {
+    height: 50%;
+    top: 0;
+}
+
+.actual_hand {
+    cursor: pointer;
+}
+
+#hour .actual_hand {
+    background: #5997ED;
+    width: 100%;
+    height: 45%;
+    border-radius: 10px;
+}
+
+#min .actual_hand {
+    background: #FFA601;
+    width: 100%;
+    height: 80%;
+    border-radius: 10px;
+}
+
+#hour .dot {
+    background: #5997ED;
+}
+
+#min .dot {
+    background: #FFA601;
+}
+
+.center {
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: black;
+
+    left: 48.5%;
+    top: 380px;
+}
