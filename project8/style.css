@@ -3,7 +3,7 @@ body {
 }
 
 section {
-    padding: 60px 80px;
+    padding: 60px 100px;
     margin: auto;
 }
 
@@ -48,6 +48,7 @@ section {
     display: flex;
     border-bottom: 1px solid black;
     height: 30px;
+    line-height: 30px;
 }
 
 .body-header div {
@@ -80,9 +81,30 @@ section {
     background-color: antiquewhite;
     border-left: 1px solid black;
     display: flex;
-    align-items: center;
+    flex-direction: column;
 }
 
 .cell.first {
     border-left: none;
 }
+
+.upper {
+    width: 100%;
+    display: flex;
+}
+
+.day {
+    padding: 8px;
+    width: 10%;
+    text-align: center;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.holiday {
+    width: 90%;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+

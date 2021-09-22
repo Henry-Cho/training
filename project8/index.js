@@ -3,6 +3,21 @@ let calendar = {
     cur_month: new Date().getMonth(),
 };
 
+const holidays = {
+    0: {1: "New Year's Day"},
+    1: {15: "Presidents' Day"},
+    2: {17: "St. Patrick's Day"},
+    3: {19: "Patriots' Day"},
+    4: {9: "Mother's Day"},
+    5: {20: "Father's Day"},
+    6: {4: "Independence Day"},
+    7: {4: "Barack Obama Day"},
+    8: {6: "Labor Day"},
+    9: {11: "Columbus Day"},
+    10: {11: "Veterans Day"},
+    11: {25: "Christmas"}
+}
+
 const setDate = () => new Date();
 
 // get day = sun: 0 - sat: 6 || so today is wed: 3
@@ -38,8 +53,11 @@ const display = () => {
                 // first cell
                 if (j === 0 && j === start_day) {
                     html_string += `
-                    <div class="cell first" id="cell${day_id}">
-                        <div class="day">${day_id + 1}</div>
+                    <div class="cell" id="cell${day_id}">
+                        <div class="upper">
+                            <div class="day">${day_id + 1}</div>
+                            <div class="holiday"></div>
+                        </div>
                         <div class="todo"></div>
                     </div>`;
                     ++day_id;
@@ -49,8 +67,6 @@ const display = () => {
                 else if (j === 0) {
                     html_string += `
                     <div class="cell first">
-                        <div class="day"></div>
-                        <div class="todo"></div>
                     </div>`;
                     ++cell_count;
                     continue;
@@ -59,7 +75,10 @@ const display = () => {
                 if (j >= start_day) {
                     html_string += `
                     <div class="cell" id="cell${day_id}">
-                        <div class="day">${day_id + 1}</div>
+                        <div class="upper">
+                            <div class="day">${day_id + 1}</div>
+                            <div class="holiday"></div>
+                        </div>
                         <div class="todo"></div>
                     </div>`;
                     ++day_id;
@@ -69,8 +88,6 @@ const display = () => {
                 // do not put cell id
                 html_string += `
                     <div class="cell">
-                        <div class="day"></div>
-                        <div class="todo"></div>
                     </div>`;
                 ++cell_count;
             }
@@ -81,7 +98,10 @@ const display = () => {
                 if (j === 0) {
                     html_string += `
                     <div class="cell first" id="cell${day_id}">
-                        <div class="day">${day_id + 1}</div>
+                        <div class="upper">
+                            <div class="day">${day_id + 1}</div>
+                            <div class="holiday"></div>
+                        </div>
                         <div class="todo"></div>
                     </div>`;
                     ++day_id;
@@ -94,15 +114,16 @@ const display = () => {
                 if (day_id >= last_date) {
                     html_string += `
                     <div class="cell">
-                        <div class="day"></div>
-                        <div class="todo"></div>
                     </div>`
                     ++cell_count;
                     continue;
                 }
                 html_string += `
                 <div class="cell" id="cell${day_id}">
+                    <div class="upper">
                     <div class="day">${day_id + 1}</div>
+                    <div class="holiday"></div>
+                    </div>
                     <div class="todo"></div>
                 </div>`;
                 ++day_id;
@@ -113,11 +134,19 @@ const display = () => {
 
     }
 
-    console.log(start_day);
-
-    console.log(html_string);
     const body_body = document.querySelector(".body-body");
     body_body.innerHTML = html_string;
+
+
+    const holidate = Object.keys(holidays[calendar.cur_month]) - 1;
+
+    const holiday_cell = document.querySelector(`#cell${holidate}`);
+    const holiday = document.querySelector(`#cell${holidate} .holiday`);
+    holiday.classList.add("change");
+
+    const holiday_part = document.querySelector(".change");
+    holiday_cell.style.background = "#DAA49A";
+    holiday_part.innerHTML = Object.values(holidays[calendar.cur_month]).join("");
 }
 
 const goPrev = () => {
