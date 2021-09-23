@@ -21,17 +21,22 @@ const holidays = {
 // get day = sun: 0 - sat: 6 || so today is wed: 3
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-const popModal = (e) => {
-    console.log(e);
-    console.log(e.target.children[1]);
+// const popModal = (e) => {
+//     // console.log(e);
+//     // console.log(e.target.children[1]);
 
-    const modal_bg = document.querySelector(".modal_bg");
-    const modal = document.querySelector(".modal");
+//     const modal_bg = document.querySelector(".modal_bg");
+//     const modal = document.querySelector(".modal");
+//     const modal_date = document.querySelector(".modal_date");
 
-    modal_bg.style.display="block";
-    modal.style.display = "block";
+//     if (e.target.children[1].id === undefined) {
+//         return;
+//     }
+//     modal_date.innerHTML = e.target.children[1].id;
+//     modal_bg.style.display="block";
+//     modal.style.display = "block";
     
-}
+// }
 
 const display = () => {
     const cur_month = document.querySelector("#month");
@@ -63,7 +68,7 @@ const display = () => {
                 // first cell
                 if (j === 0 && j === start_day) {
                     html_string += `
-                    <div class="cell" id="cell${day_id}" onclick="popModal(event)">
+                    <div class="cell" id="cell${day_id}">
                         <div class="upper">
                             <div class="day">${day_id + 1}</div>
                             <div class="holiday"></div>
@@ -84,7 +89,7 @@ const display = () => {
                 // put cell id
                 if (j >= start_day) {
                     html_string += `
-                    <div class="cell" id="cell${day_id}" onclick="popModal(event)">
+                    <div class="cell" id="cell${day_id}">
                         <div class="upper">
                             <div class="day">${day_id + 1}</div>
                             <div class="holiday"></div>
@@ -107,7 +112,7 @@ const display = () => {
             for (let j = 0; j < 7; j++) {
                 if (j === 0) {
                     html_string += `
-                    <div class="cell first" id="cell${day_id}" onclick="popModal(event)">
+                    <div class="cell first" id="cell${day_id}">
                         <div class="upper">
                             <div class="day">${day_id + 1}</div>
                             <div class="holiday"></div>
@@ -129,7 +134,7 @@ const display = () => {
                     continue;
                 }
                 html_string += `
-                <div class="cell" id="cell${day_id}" onclick="popModal(event)">
+                <div class="cell" id="cell${day_id}">
                     <div class="upper">
                     <div class="day">${day_id + 1}</div>
                     <div class="holiday"></div>
@@ -181,12 +186,12 @@ const goNext = () => {
     display();
 }
 
-const closeModal = () => {
-    console.log("DJDJDJD")
-    const modal_bg = document.querySelector(".modal_bg");
-    console.log(modal_bg);
-    const modal = document.querySelector(".modal");
+// const closeModal = () => {
+//     console.log("DJDJDJD")
+//     const modal_bg = document.querySelector(".modal_bg");
+//     console.log(modal_bg);
+//     const modal = document.querySelector(".modal");
 
-    modal_bg.style.display="none";
-    modal.style.display = "none";
-}
+//     modal_bg.style.display="none";
+//     modal.style.display = "none";
+// }

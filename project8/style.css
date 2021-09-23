@@ -16,7 +16,7 @@ body {
 .modal {
     position: absolute;
     transform: translateX(70%);
-    top: 300px;
+    top: 0px;
     width: 40%;
     height: 40%;
     background: antiquewhite;
@@ -24,11 +24,21 @@ body {
     z-index: 3;
     border-radius: 10px;
     border: 1px solid black;
-    display: none;
+    padding: 10px 20px;
+}
+
+.modal span, .modal input {
+    margin-bottom: 10px;
 }
 
 .modal button {
     cursor: pointer;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
 }
 
 section {
@@ -136,4 +146,3 @@ section {
     display: flex;
     align-items: center;
 }
-
