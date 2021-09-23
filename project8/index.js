@@ -18,10 +18,20 @@ const holidays = {
     11: {25: "Christmas"}
 }
 
-const setDate = () => new Date();
-
 // get day = sun: 0 - sat: 6 || so today is wed: 3
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+const popModal = (e) => {
+    console.log(e);
+    console.log(e.target.children[1]);
+
+    const modal_bg = document.querySelector(".modal_bg");
+    const modal = document.querySelector(".modal");
+
+    modal_bg.style.display="block";
+    modal.style.display = "block";
+    
+}
 
 const display = () => {
     const cur_month = document.querySelector("#month");
@@ -53,12 +63,12 @@ const display = () => {
                 // first cell
                 if (j === 0 && j === start_day) {
                     html_string += `
-                    <div class="cell" id="cell${day_id}">
+                    <div class="cell" id="cell${day_id}" onclick="popModal(event)">
                         <div class="upper">
                             <div class="day">${day_id + 1}</div>
                             <div class="holiday"></div>
                         </div>
-                        <div class="todo"></div>
+                        <div class="todo" id="${calendar.cur_year}-${months[calendar.cur_month]}-${day_id+1}"></div>
                     </div>`;
                     ++day_id;
                     ++cell_count;
@@ -74,12 +84,12 @@ const display = () => {
                 // put cell id
                 if (j >= start_day) {
                     html_string += `
-                    <div class="cell" id="cell${day_id}">
+                    <div class="cell" id="cell${day_id}" onclick="popModal(event)">
                         <div class="upper">
                             <div class="day">${day_id + 1}</div>
                             <div class="holiday"></div>
                         </div>
-                        <div class="todo"></div>
+                        <div class="todo" id="${calendar.cur_year}-${calendar.cur_month+1}-${day_id+1}"></div>
                     </div>`;
                     ++day_id;
                     ++cell_count;
@@ -97,12 +107,12 @@ const display = () => {
             for (let j = 0; j < 7; j++) {
                 if (j === 0) {
                     html_string += `
-                    <div class="cell first" id="cell${day_id}">
+                    <div class="cell first" id="cell${day_id}" onclick="popModal(event)">
                         <div class="upper">
                             <div class="day">${day_id + 1}</div>
                             <div class="holiday"></div>
                         </div>
-                        <div class="todo"></div>
+                        <div class="todo" id="${calendar.cur_year}-${calendar.cur_month+1}-${day_id+1}"></div>
                     </div>`;
                     ++day_id;
                     ++cell_count;
@@ -119,12 +129,12 @@ const display = () => {
                     continue;
                 }
                 html_string += `
-                <div class="cell" id="cell${day_id}">
+                <div class="cell" id="cell${day_id}" onclick="popModal(event)">
                     <div class="upper">
                     <div class="day">${day_id + 1}</div>
                     <div class="holiday"></div>
                     </div>
-                    <div class="todo"></div>
+                    <div class="todo" id="${calendar.cur_year}-${calendar.cur_month+1}-${day_id+1}"></div>
                 </div>`;
                 ++day_id;
                 ++cell_count;
@@ -169,4 +179,14 @@ const goNext = () => {
         calendar.cur_month += 1;
     }
     display();
+}
+
+const closeModal = () => {
+    console.log("DJDJDJD")
+    const modal_bg = document.querySelector(".modal_bg");
+    console.log(modal_bg);
+    const modal = document.querySelector(".modal");
+
+    modal_bg.style.display="none";
+    modal.style.display = "none";
 }
