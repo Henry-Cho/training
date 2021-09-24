@@ -48,22 +48,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project 8 - Calendar-</title>
     <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="index.js" defer></script>
-    <scrip
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
 </head>
 <body onload="display()">
-
 <script>
     let ajax = new XMLHttpRequest();
     let method = "GET";
     let url = "data.php";
     let asynchronous = true;
-
-    console.log("HHIHIHIHI");
-
+    
     ajax.open(method, url, asynchronous);
 
     ajax.send();
@@ -71,22 +65,75 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ajax.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
             let data = JSON.parse(this.responseText);
-            console.log(data);
 
             for (let i = 0; i < data.length; i++) {
-                let date = `${data[i].year}-${data[i].month}-${data[i].day}`;
+                if (data[i].month === (calendar.cur_month + 1).toString()) {
+                    let date = `${data[i].year}-${data[i].month}-${data[i].day}`;
 
                 let cell = document.getElementById(date);
 
                 cell.innerHTML = `
                 <div>${data[i].title} & ${data[i].location}</div>
                 `;
+                }
             }
+
         }
     }
-;
-</script>
 
+    function getPrev(){
+
+        $.ajax({
+
+            type:"GET",//or POST
+            url:"data.php",
+            success:function(responsedata){
+               // process on data
+                let data = JSON.parse(responsedata);
+
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].month === (calendar.cur_month + 1).toString()) {
+                        let date = `${data[i].year}-${data[i].month}-${data[i].day}`;
+
+                        let cell = document.getElementById(date);
+
+                        cell.innerHTML = `
+                        <div>${data[i].title} & ${data[i].location}</div>
+                        `;
+                    }
+                }
+            }
+        })
+
+        goPrev();
+    }
+
+    function getNext() {
+        $.ajax({
+            type:"GET",//or POST
+            url:"data.php",
+            success:function(responsedata){
+                // process on data
+                
+                let data = JSON.parse(responsedata);
+
+                for (let i = 0; i < data.length; i++) {
+                    console.log(data[i].month);
+                    if (data[i].month === (calendar.cur_month + 1).toString()) {
+                        let date = `${data[i].year}-${data[i].month}-${data[i].day}`;
+
+                        let cell = document.getElementById(date);
+
+                        cell.innerHTML = `
+                        <div>${data[i].title} & ${data[i].location}</div>
+                        `;
+                    }
+                }
+            }
+        })
+        goNext();
+    }
+</script>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <label>Appointment Title: </label><input type="text" name="title">
             <label>Appointment Year: </label><input type="text" name="year">
@@ -115,8 +162,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <!-- calendar header -->
             <div class="cal-header">
                 <span id="month"></span>
-                <button id="prev" onclick="goPrev()"><</button>
-                <button id="next" onclick="goNext()">></button>
+                <button id="prev" onclick="getPrev()"><</button>
+                <button id="next" onclick="getNext()">></button>
             </div>
             <div class="cal-body">
                 <div class="body-header">
