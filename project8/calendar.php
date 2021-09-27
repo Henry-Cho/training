@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $app_location = trim($_POST['location']);
 
     $logedInUsername = $_SESSION['username'];
+    $logedIn = $_SESSION["loggedin"];
 
     $sql = "INSERT INTO activity (username, title, year, month, day, location) VALUES (?,?,?,?,?,?)";
 
@@ -118,7 +119,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 let data = JSON.parse(responsedata);
 
                 for (let i = 0; i < data.length; i++) {
-                    console.log(data[i].month);
                     if (data[i].month === (calendar.cur_month + 1).toString()) {
                         let date = `${data[i].year}-${data[i].month}-${data[i].day}`;
 
@@ -136,17 +136,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </script>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <label>Appointment Title: </label><input type="text" name="title">
+            <br>
             <label>Appointment Year: </label><input type="text" name="year">
+            <br>
             <label>Appointment Month: </label><input type="text" name="month">
+            <br>
             <label>Appointment Day: </label><input type="text" name="day">
+            <br>
             <label>Appointment Location: </label><input type="text" name="location">
+            <br>
             <input type="submit" value="Submit">
             <p>Don't have an account? <a href="registration.php">Sign up now</a>.</p>
             <p>Already have an account? <a href="login.php">Login here</a>.</p>
             <a href="logout.php">Sign Out of Your Account</a>
     </form>
-    <!-- <div class="modal_bg" onclick="closeModal()"></div> -->
-    <!-- <div class="modal">
+    <!-- <div class="modal_bg" onclick="closeModal()"></div>
+    <div class="modal">
         <h2 class="modal_date"></h2>
         <div class="input">
             <span>Appointment Title: </span><input type="text" name="title">
